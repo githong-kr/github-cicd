@@ -45,4 +45,4 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: githong-kr/github-cicd:${{ github.sha }}
+          tags: githong-kr/github-cicd:latest
