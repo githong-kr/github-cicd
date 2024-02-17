@@ -17,15 +17,30 @@ jobs:
   build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
-    permissions:
-      packages: write
-      contents: read
 
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - name: Source Code Checkout
         uses: actions/checkout@v3
+        
+      - name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          # list of Docker images to use as base name for tags
+          images: |
+            name/app
+            ghcr.io/username/app            
+          # generate Docker tags based on the following events/attributes
+          tags: |
+            type=schedule
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha   
 
       # Runs a single command using the runners shell
       - name: Set up Docker Buildx
@@ -38,10 +53,12 @@ jobs:
           registry: ghcr.io
           username: ${{ secrets.GHCR_ID }}
           password: ${{ secrets.GHCR_PASSWORD }}
+          
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/${{ secrets.GHCR_TAG }}/github-cicd:main
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
