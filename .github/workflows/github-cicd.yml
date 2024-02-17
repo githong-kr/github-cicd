@@ -36,12 +36,11 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ secrets.GHCR_ID }}
-          password: ${{ secrets.GHCR_PASSWORD }}
+          password: ${{ secrets.GITHUB_TOKEN }}
           
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
-          registry: ghcr.io
           context: .
           file: ./Dockerfile
           push: true
