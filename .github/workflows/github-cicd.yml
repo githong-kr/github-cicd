@@ -33,12 +33,12 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: $GHCR_ID
-          password: $GHCR_PASSWORD
+          username: ${{ secrets.GHCR_ID }}
+          password: ${{ secrets.GHCR_PASSWORD }}
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ghcr.io/$GHCR_TAG/github-cicd:main
+          tags: ghcr.io/${{ secrets.GHCR_TAG }}/github-cicd:main
