@@ -67,7 +67,7 @@ jobs:
           include: ${{ github.action_path }}/docker-compose.yml
 
       - name: Check File's Content
-        run: cat docker-compose.yml
+        run: cat ${{ github.action_path }}/docker-compose.yml
         
       - name: Transfer Compose File
         uses: appleboy/scp-action@v0.1.7
