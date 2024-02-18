@@ -10,7 +10,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+  IMAGE_NAME: $REGISTRY/${{ github.repository }}
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
