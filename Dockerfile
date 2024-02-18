@@ -1,10 +1,12 @@
 FROM node:21-alpine
 
-RUN mkdir -p /usr/app
-WORKDIR /usr/app
+ENV SERVER_HOME /usr/app
 
-COPY ./ /usr/app
-
+RUN mkdir -p ${SERVER_HOME}
+WORKDIR ${SERVER_HOME}
+ 
+COPY ./ ${SERVER_HOME}
+ 
 RUN npm ci
 RUN npm run build
 
