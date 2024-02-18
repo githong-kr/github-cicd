@@ -65,9 +65,12 @@ jobs:
           find: "$IMAGE"
           replace: ${{ env.REGISTRY }}/${{ github.repository }}
           include: ./docker-compose.yml
-
-      - name: Check File's Content
-        run: cat ./docker-compose.yml
         
       - name: Transfer Compose File
         uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secret.HOST }}
+          username: ${{ secret.USER }}
+          password: ${{ secret.PASSWORD }}
+          source: ./docker-compose.yml
+          target: ~/Documents/release/github-cicd
