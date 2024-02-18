@@ -63,12 +63,8 @@ jobs:
         uses: actions/checkout@v4
     
       - name: Modify Docker-Compose File
-        uses: Nambers/ReplaceStringInFile@v1
-        with:
-          path: ./docker-compose.yml
-          oldString: $IMAGE
-          newString: ${{ env.REGISTRY }}/${{ github.repository }}
-          showFileContent: true
+        run: |
+          sed -i 's/$IMAGE/${{ env.REGISTRY }}/${{ github.repository }}/g' ./docker-compose.yml
 
       - name: Check Docker-Compose File
         run: cat ./docker-compose.yml
