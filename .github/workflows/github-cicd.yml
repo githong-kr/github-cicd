@@ -72,9 +72,9 @@ jobs:
       - name: Transfer Compose File
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ screts.HOST }}
-          username: ${{ screts.USER }}
-          password: ${{ screts.PASSWORD }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
           source: ./docker-compose.yml
           target: ~/Documents/release/${{ github.repository }}
           rm: true
