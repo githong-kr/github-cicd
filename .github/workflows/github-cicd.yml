@@ -64,10 +64,10 @@ jobs:
         with: 
           find: "$IMAGE"
           replace: ${{ env.REGISTRY }}/${{ github.repository }}
-          include: ${{ GITHUB_ACTION_PATH }}/docker-compose.yml
+          include: ./docker-compose.yml
 
       - name: Check File's Content
-        run: cat ${{ GITHUB_ACTION_PATH }}/docker-compose.yml
+        run: cat ./docker-compose.yml
         
       - name: Transfer Compose File
         uses: appleboy/scp-action@v0.1.7
