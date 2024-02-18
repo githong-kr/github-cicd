@@ -10,7 +10,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ env.REGISTRY }}/${{ github.repository }}
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -64,7 +63,7 @@ jobs:
         uses: jacobtomlinson/gha-find-replace@v2
         with: 
           find: "$IMAGE"
-          replace: ${{ env.IMAGE_NAME }}
+          replace: ${{ env.REGISTRY }}/${{ github.repository }}
           include: 'docker-compose.yml'
 
       - name: Check File's Content
