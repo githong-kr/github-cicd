@@ -63,10 +63,10 @@ jobs:
         uses: actions/checkout@v4
     
       - name: Modify Docker-Compose File
-        uses: jacobtomlinson/gha-find-replace@v2
+        uses: jacobtomlinson/gha-find-replace@v3
         with: 
           find: "$IMAGE"
-          replace: ${{ env.REGISTRY }}/${{ github.repository }}
+          replace: "${{ env.REGISTRY }}/${{ github.repository }}"
           include: ./docker-compose.yml
 
       - name: Check Docker-Compose File
