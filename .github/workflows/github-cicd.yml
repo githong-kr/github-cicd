@@ -69,8 +69,8 @@ jobs:
       - name: Transfer Compose File
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secret.HOST }}
-          username: ${{ secret.USER }}
-          password: ${{ secret.PASSWORD }}
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
           source: ./docker-compose.yml
           target: ~/Documents/release/github-cicd
