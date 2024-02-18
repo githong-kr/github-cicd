@@ -5,4 +5,4 @@ services:
     restart: 'on-failure'
     image: $IMAGE
     expose:
-      - $PORT
+      - 3000
