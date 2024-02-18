@@ -10,8 +10,8 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: ${{ github.repository }}
-
+  IMAGE_NAME: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+  
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -41,7 +41,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: ${{ env.IMAGE_NAME }}
           
       - name: Build and push
         uses: docker/build-push-action@v5
@@ -50,3 +50,32 @@ jobs:
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
+
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      packages: read
+
+    steps:
+      - name: Modify Docker-Compose File
+        uses: jacobtomlinson/gha-find-replace@v2
+        with: 
+          find: "$IMAGE"
+          replace: ${{ env.IMAGE_NAME }}
+          include: 'docker-compose.yml'
+
+      - name: Check File's Content
+        run: cat docker-compose.yml
+        
+      - name: Transfer Compose File
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host:
+          username:
+          password:
+          port:
+          source:
+          target:
+      
