@@ -68,6 +68,12 @@ jobs:
           find: "$IMAGE"
           replace: ${{ env.REGISTRY }}/${{ github.repository }}
           include: ./docker-compose.yml
+
+      - name: Check Docker-Compose File
+        run: cat ./docker-compose.yml
+
+      - name: Ping To Server
+        run: ping ${{ secrets.HOST }}
         
       - name: Transfer Compose File
         uses: appleboy/scp-action@v0.1.7
