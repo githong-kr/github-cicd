@@ -73,7 +73,9 @@ jobs:
         run: cat ./docker-compose.yml
 
       - name: Ping To Server
-        run: ping ${{ secrets.HOST }}
+        uses: Leocardoso94/is-my-site-up@v1.2
+        with:
+          site: ${{ secrets.HOST }}
         
       - name: Transfer Compose File
         uses: appleboy/scp-action@v0.1.7
