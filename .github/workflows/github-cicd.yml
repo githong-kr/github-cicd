@@ -10,7 +10,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  
+
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
@@ -41,7 +41,7 @@ jobs:
         uses: docker/metadata-action@v5
         with:
           images: ${{ env.REGISTRY }}/${{ github.repository }}
-          
+
       - name: Build and push
         uses: docker/build-push-action@v5
         with:
@@ -61,10 +61,10 @@ jobs:
     steps:
       - name: Source Code Checkout
         uses: actions/checkout@v4
-    
+
       - name: Modify Docker-Compose File
         run: |
-          sed -i "s@$IMAGE@${{ env.REGISTRY }}/${{ github.repository }}@g" ./docker-compose.yml
+          sed -i "s@#IMAGE@${{ env.REGISTRY }}/${{ github.repository }}@g" ./docker-compose.yml
 
       - name: Check Docker-Compose File
         run: cat ./docker-compose.yml
@@ -73,7 +73,7 @@ jobs:
         uses: Leocardoso94/is-my-site-up@v1.2
         with:
           site: ${{ secrets.HOST }}
-        
+
       - name: Transfer Compose File
         uses: appleboy/scp-action@v0.1.7
         with:

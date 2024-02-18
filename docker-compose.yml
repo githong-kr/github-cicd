@@ -3,6 +3,6 @@ services:
   next:
     container_name: 'github-cicd'
     restart: 'on-failure'
-    image: $IMAGE
+    image: #IMAGE
     expose:
       - 3000
