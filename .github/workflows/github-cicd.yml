@@ -64,7 +64,7 @@ jobs:
         with: 
           find: "$IMAGE"
           replace: ${{ env.REGISTRY }}/${{ github.repository }}
-          include: 'docker-compose.yml'
+          include: ${{ github.action_path }}/docker-compose.yml
 
       - name: Check File's Content
         run: cat docker-compose.yml
