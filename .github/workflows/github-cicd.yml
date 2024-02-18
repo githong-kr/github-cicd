@@ -76,4 +76,5 @@ jobs:
           username: ${{ env.USER }}
           password: ${{ env.PASSWORD }}
           source: ./docker-compose.yml
-          target: ~/Documents/release/github-cicd
+          target: ~/Documents/release/${{ github.repository }}
+          rm: true
