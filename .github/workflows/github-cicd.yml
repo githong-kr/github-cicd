@@ -71,6 +71,4 @@ jobs:
         
       - name: Transfer Compose File
         uses: appleboy/scp-action@v0.1.7
-
-          target:
       
