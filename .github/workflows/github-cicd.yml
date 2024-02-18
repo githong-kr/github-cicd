@@ -10,7 +10,6 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGENAME: ghcr.io/${{ github.repository }}
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -41,7 +40,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.IMAGENAME }}
+          images: ${{ env.REGISTRY }}/${{ github.repository }}
           
       - name: Build and push
         uses: docker/build-push-action@v5
@@ -65,7 +64,7 @@ jobs:
     
       - name: Modify Docker-Compose File
         run: |
-          sed -i "s/$IMAGE/${{ env.IMAGENAME }}/g" ./docker-compose.yml
+          sed -i "s/$IMAGE/${{ env.REGISTRY }}\/${{ github.repository }}/g" ./docker-compose.yml
 
       - name: Check Docker-Compose File
         run: cat ./docker-compose.yml
