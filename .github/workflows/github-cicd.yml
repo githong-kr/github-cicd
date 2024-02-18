@@ -62,6 +62,9 @@ jobs:
       packages: read
 
     steps:
+      - name: Source Code Checkout
+        uses: actions/checkout@v4
+    
       - name: Modify Docker-Compose File
         uses: jacobtomlinson/gha-find-replace@v2
         with: 
