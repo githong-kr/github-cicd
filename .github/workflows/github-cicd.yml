@@ -10,6 +10,9 @@ on:
 
 env:
   REGISTRY: ghcr.io
+  HOST: ${{ secrets.HOST }}
+  USER: ${{ secrets.USER }}
+  PASSWORD: ${{ secrets.PASSWORD }}
   
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -69,8 +72,8 @@ jobs:
       - name: Transfer Compose File
         uses: appleboy/scp-action@v0.1.7
         with:
-          host: ${{ secrets.HOST }}
-          username: ${{ secrets.USER }}
-          password: ${{ secrets.PASSWORD }}
+          host: ${{ env.HOST }}
+          username: ${{ env.USER }}
+          password: ${{ env.PASSWORD }}
           source: ./docker-compose.yml
           target: ~/Documents/release/github-cicd
