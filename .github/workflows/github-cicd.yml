@@ -83,3 +83,13 @@ jobs:
           source: ./docker-compose.yml
           target: ~/Documents/release/${{ github.repository }}
           rm: true
+      
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USER }}
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            cat ${{ secrets.GITHUB_TOKEN }} | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+            docker compose up -d
