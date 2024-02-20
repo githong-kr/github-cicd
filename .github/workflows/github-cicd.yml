@@ -92,5 +92,5 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           script: |
             ls -al
-            cat ${{ secrets.GITHUB_TOKEN }} | docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
-            docker compose up -d
+            cat ${{ secrets.GITHUB_TOKEN }} | /usr/local/bin/docker login https://ghcr.io -u ${{ github.actor }} --password-stdin
+            /usr/local/bin/docker compose up -d
