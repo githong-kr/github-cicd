@@ -95,5 +95,4 @@ jobs:
             /usr/local/bin/docker login https://${{ env.REGISTRY }} -u ${{ github.actor }} --password=${{ secrets.GITHUB_TOKEN }}
             /usr/local/bin/docker ps -aqf ancestor=${{ env.REGISTRY }}/${{ github.repository }}:main
             /usr/local/bin/docker compose down --rmi all
-            /usr/local/bin/docker rm $CONTAINER_ID
             /usr/local/bin/docker compose up -d
